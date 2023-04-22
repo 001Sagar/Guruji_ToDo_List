@@ -90,7 +90,7 @@ module.exports.delete = async function(req,res){
             id:user._id
           })
           return res.status(200).json({
-            meassage:"Updated Successfully",del
+            meassage:"Deleted Successfully"
           })
     } catch (error) {
         console.log(error);

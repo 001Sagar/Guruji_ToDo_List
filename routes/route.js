@@ -8,15 +8,15 @@ const usercontroller = require('../controllers/user')
 
 route.post('/SignUp',usercontroller.SignUp);
 route.post('/Login',usercontroller.login);
-route.put('/update',jwt.authenticate,usercontroller.update);
+route.put('/updatepassword',jwt.authenticate,usercontroller.update);
 route.delete('/delete',jwt.authenticate,usercontroller.delete);
 
 
 
 
-route.post('/create',home.create);
-route.post('/check',home.check);
-route.put('/update',jwt.authenticate,home.update);
-route.delete('/delete',jwt.authenticate,home.delete);
+route.post('/create',jwt.authenticate,home.create);
+route.post('/check',jwt.authenticate,home.check);
+route.put('/updatetask',jwt.authenticate,home.update);
+route.delete('/deletetask',jwt.authenticate,home.delete);
 
 module.exports = route;

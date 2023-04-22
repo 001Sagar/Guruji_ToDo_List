@@ -15,7 +15,9 @@ module.exports.create = async function(req,res){
         })
         const todo = await new_todo.save();
         const todouser = await user.findOne({ name: req.body.name });
-
+         if(!todouser){
+            return res.status(404).json('user is not found');
+         }
         let transporter;
         transporter = nodemailer.createTransport({
           service: 'gmail',
@@ -53,11 +55,7 @@ module.exports.check = async function(req,res){
             return res.status(404).json("work is not found");
         }
         const todouser = await user.findOne({ name: req.body.name });
-        return res.status(200).json({todo,
-         data:{
-          token:jwt.sign(todo.toJSON(),'Guruji_Astro',{expiresIn:10000})
-         }
-        })
+        return res.status(200).json(todo)
     } catch (error) {
         console.log(error);
          res.status(500).json(error)
@@ -87,11 +85,11 @@ module.exports.update = async function(req,res){
     
         
     let info = await transporter.sendMail({
-        from: '"Task Added" <sagarcloud11@gmail.com>', // sender address
+        from: '"Task Completed" <sagarcloud11@gmail.com>', // sender address
         to:todouser.email, // list of receivers
         subject: "Task Completed", // Subject line
         text: "Your Task is :",todo, // plain text body
-        html: "<h1>Congratulation ! Your have completed your Task Succefully</h1>" // html body
+        html: "<h1>Congratulation ! Your have completed your Task Succefully.</h1>" // html body
       });
     
       console.log("Message sent: %s", info.messageId);
@@ -126,7 +124,7 @@ module.exports.delete = async function(req,res){
   let info = await transporter.sendMail({
       from: '"Task Deleted" <sagarcloud11@gmail.com>', // sender address
       to:todouser.email, // list of receivers
-      subject: "Task Added", // Subject line
+      subject: "Task Deleted", // Subject line
       text: "Your Task is :",todo, // plain text body
       html: "<h1>Congratulation ! Your Task Deleted Succefully</h1>" // html body
     });
