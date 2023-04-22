@@ -1,5 +1,6 @@
 ### To Start -
-You have to run the command "nodemon index.js"
+1. You have to install all the package by "npm install" command
+2. You have to run the command "nodemon index.js".
 
 Then You can check all the API's on postman
 
