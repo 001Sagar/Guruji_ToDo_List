@@ -3,7 +3,6 @@ const TODO = require('../models/todo_schema');
 const jwt = require('jsonwebtoken');
 const secret = 'Guruji_Astro'; // replace with your own secret key
 const nodemailer = require('nodemailer');
-const sendemail = require('../utility/sendmail')
 const ejs = require('ejs');
 const user = require('../models/User');
 
